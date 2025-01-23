@@ -5,19 +5,45 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 public class ChocolateBagsTest2 {
-    @ParameterizedTest(name = "small={0}, big={1}, total={2}, result={3}")
-    @CsvSource({
+  //  @ParameterizedTest(name = "small={0}, big={1}, total={2}, result={3}")
+   // @CsvSource({
             // The total is higher than the amount of small and big bars.
-            "1,1,5,0", "1,1,6,1", "1,1,7,-1", "1,1,8,-1",
-            // No need for small bars.
-            "4,0,10,-1", "4,1,10,-1", "5,2,10,0", "5,3,10,0",
-            // Need for big and small bars.
-            "0,3,17,-1", "1,3,17,-1", "2,3,17,2", "3,3,17,2",
-            "0,3,12,-1", "1,3,12,-1", "2,3,12,2", "3,3,12,2",
-            // Only small bars.
-            "4,2,3,3", "3,2,3,3", "2,2,3,-1", "1,2,3,-1"
-    })
-    public void testAlgorithm(int small, int big, int total, int expectedResult) {
+//            "1,1,5,0", "1,1,6,1", "1,1,7,-1", "1,1,8,-1",
+//            // No need for small bars.
+//            "4,0,10,-1", "4,1,10,-1", "5,2,10,0", "5,3,10,0",
+//            // Need for big and small bars.
+//            "0,3,17,-1", "1,3,17,-1", "2,3,17,2", "3,3,17,2",
+//            "0,3,12,-1", "1,3,12,-1", "2,3,12,2", "3,3,12,2",
+//            // Only small bars.
+//            "4,2,3,3", "3,2,3,3", "2,2,3,-1", "1,2,3,-1"
+//    })
+//
+    @ParameterizedTest(name = "small={0}, big ={1}, total ={2}, result ={3}")
+    @CsvSource({"1,1,5,0", "1,1,6,1", "1,1,7,-1", "1,1,8,-1",})
+    public void totalIsTooBig(int small, int big, int total, int expectedResult) {
+        int result = new ChocolateBags().calculate(small, big, total);
+        Assertions.assertEquals(expectedResult, result);
+    }
+
+
+    @ParameterizedTest(name = "small={0}, big ={1}, total ={2}, result ={3}")
+    @CsvSource({"4,0,10,-1", "4,1,10,-1", "5,2,10,0", "5,3,10,0", "5,1,5,0"})
+    public void noNeedForSmallBars(int small, int big, int total, int expectedResult) {
+        int result = new ChocolateBags().calculate(small, big, total);
+        Assertions.assertEquals(expectedResult, result);
+    }
+
+    @ParameterizedTest(name = "small={0}, big ={1}, total ={2}, result ={3}")
+    @CsvSource({"0,3,18,-1", "1,3,17,-1", "2,3,17,2", "3,3,17,2",
+            "0,3,12,-1", "1,3,12,-1", "2,3,12,2", "3,3,12,2","1,1,6,1"})
+    public void needForBigAndSmallBars(int small, int big, int total, int expectedResult) {
+        int result = new ChocolateBags().calculate(small, big, total);
+        Assertions.assertEquals(expectedResult, result);
+    }
+
+    @ParameterizedTest(name = "small={0}, big ={1}, total ={2}, result ={3}")
+    @CsvSource({"4,2,3,3", "3,2,3,3", "2,2,3,-1", "1,2,3,-1", "5,1,4,4"})
+    public void onlySmallBars(int small, int big, int total, int expectedResult) {
         int result = new ChocolateBags().calculate(small, big, total);
         Assertions.assertEquals(expectedResult, result);
     }
