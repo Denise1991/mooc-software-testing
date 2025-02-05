@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CaesarShiftCipherTest {
 
 
-    CaesarShiftCipher cipher = new CaesarShiftCipher(); //initialize the caesercipher class with the method
+    CaesarShiftCipher cipher = new CaesarShiftCipher(); //invokes the caesercipher class with the method
 
 
     @Test
